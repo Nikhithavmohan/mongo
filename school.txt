@@ -1,0 +1,28 @@
+test> use SchoolLibrary
+switched to db SchoolLibrary
+SchoolLibrary> db.books.insert({title: "Introduction to Science",author:"Dr.Smith",available:"true"})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('68cac0a1e9b51f8496cebea4') }
+}
+SchoolLibrary> db.books.find()
+[
+  {
+    _id: ObjectId('68cac0a1e9b51f8496cebea4'),
+    title: 'Introduction to Science',
+    author: 'Dr.Smith',
+    available: 'true'
+  }
+]
+SchoolLibrary> db.books.drop()
+true
+SchoolLibrary> show collections
+
+SchoolLibrary> db.dropDatabase()
+{ ok: 1, dropped: 'SchoolLibrary' }
+SchoolLibrary> show dbs
+admin   40.00 KiB
+config  92.00 KiB
+local   72.00 KiB
+SchoolLibrary>
