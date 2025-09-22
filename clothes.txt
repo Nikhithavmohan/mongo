@@ -1,0 +1,363 @@
+
+test> use Clothingstore
+switched to db Clothingstore
+Clothingstore> db.Clothes.insertMany([
+...     { name: "Denim Jeans", category: "Pants", price: 599.99, stock: 20, discount: true },
+...     { name: "Cotton T-Shirt", category: "Shirt", price: 199.99, stock: 15, discount: false },
+...     { name: "Leather Jacket", category: "Jacket", price: 999.99, stock: 5, discount: true },
+...     { name: "Formal Shirt", category: "Shirt", price: 349.99, stock: 12, discount: true },
+...     { name: "Cargo Pants", category: "Pants", price: 499.99, stock: 8, discount: false },
+...     { name: "Wool Sweater", category: "Sweater", price: 699.99, stock: 10, discount: true },
+...     { name: "Casual Shorts", category: "Shorts", price: 249.99, stock: 25, discount: true },
+...     { name: "Silk Scarf", category: "Accessories", price: 149.99, stock: 0, discount: false },
+...     { name: "Hooded Sweatshirt", category: "Sweater", price: 399.99, stock: 18, discount: true },
+...     { name: "Chinos", category: "Pants", price: 299.99, stock: 11, discount: false }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68d1d5a9c42e57ed08cebea4'),
+    '1': ObjectId('68d1d5a9c42e57ed08cebea5'),
+    '2': ObjectId('68d1d5a9c42e57ed08cebea6'),
+    '3': ObjectId('68d1d5a9c42e57ed08cebea7'),
+    '4': ObjectId('68d1d5a9c42e57ed08cebea8'),
+    '5': ObjectId('68d1d5a9c42e57ed08cebea9'),
+    '6': ObjectId('68d1d5a9c42e57ed08cebeaa'),
+    '7': ObjectId('68d1d5a9c42e57ed08cebeab'),
+    '8': ObjectId('68d1d5a9c42e57ed08cebeac'),
+    '9': ObjectId('68d1d5a9c42e57ed08cebead')
+  }
+}
+Clothingstore> Electronic> db.Clothes.find({"price" : {$gt:500}})
+ReferenceError: Electronic is not defined
+Clothingstore> db.Clothes.find({"price" : {$gt:500}})
+[
+  {
+    _id: ObjectId('68d15783008dc20256cebea4'),
+    name: 'Denim Jeans',
+    category: 'Pants',
+    price: 599.99,
+    stock: 50,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d15783008dc20256cebea6'),
+    name: 'Leather Jacket',
+    category: 'Jacket',
+    price: 999.99,
+    stock: 5,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d15783008dc20256cebea9'),
+    name: 'Wool Sweater',
+    category: 'Sweater',
+    price: 699.99,
+    stock: 10,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebea4'),
+    name: 'Denim Jeans',
+    category: 'Pants',
+    price: 599.99,
+    stock: 20,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebea6'),
+    name: 'Leather Jacket',
+    category: 'Jacket',
+    price: 999.99,
+    stock: 5,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebea9'),
+    name: 'Wool Sweater',
+    category: 'Sweater',
+    price: 699.99,
+    stock: 10,
+    discount: true
+  }
+]
+Clothingstore> db.Clothes.findOne({category: "Shirt"})
+{
+  _id: ObjectId('68d15783008dc20256cebea5'),
+  name: 'Cotton T-Shirt',
+  category: 'Shirt',
+  price: 199.99,
+  stock: 15,
+  discount: false
+}
+Clothingstore> db.Clothes.find({$and : [{price :{lte :300},{stock:{$gt:10}}}]})
+Uncaught:
+SyntaxError: Unexpected token (1:44)
+
+> 1 | db.Clothes.find({$and : [{price :{lte :300},{stock:{$gt:10}}}]})
+    |                                             ^
+  2 |
+Clothingstore> db.Clothes.find({$and : [{price :{lte :300},{stClothingstore> db.Clothes.find({$and : [{price :{lte :300}},{stock:{$gt:10}}]})
+
+Clothingstore> db.Clothes.find({$and : [{price :{lte :300}},{stock:{$gt:10}}]})
+
+Clothingstore> db.Clothes.find({$and : [{price :{$lte :300}},{stock:{$gt:10}}]})
+[
+  {
+    _id: ObjectId('68d15783008dc20256cebea5'),
+    name: 'Cotton T-Shirt',
+    category: 'Shirt',
+    price: 199.99,
+    stock: 15,
+    discount: false
+  },
+  {
+    _id: ObjectId('68d15783008dc20256cebeaa'),
+    name: 'Casual Shorts',
+    category: 'Shorts',
+    price: 249.99,
+    stock: 25,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d15783008dc20256cebead'),
+    name: 'Chinos',
+    category: 'Pants',
+    price: 299.99,
+    stock: 11,
+    discount: false
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebea5'),
+    name: 'Cotton T-Shirt',
+    category: 'Shirt',
+    price: 199.99,
+    stock: 15,
+    discount: false
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebeaa'),
+    name: 'Casual Shorts',
+    category: 'Shorts',
+    price: 249.99,
+    stock: 25,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebead'),
+    name: 'Chinos',
+    category: 'Pants',
+    price: 299.99,
+    stock: 11,
+    discount: false
+  }
+]
+Clothingstore> db.Clothes.find({$or :[{price : {$lt : 200}},{discount : true}]})
+[
+  {
+    _id: ObjectId('68d15783008dc20256cebea4'),
+    name: 'Denim Jeans',
+    category: 'Pants',
+    price: 599.99,
+    stock: 50,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d15783008dc20256cebea5'),
+    name: 'Cotton T-Shirt',
+    category: 'Shirt',
+    price: 199.99,
+    stock: 15,
+    discount: false
+  },
+  {
+    _id: ObjectId('68d15783008dc20256cebea6'),
+    name: 'Leather Jacket',
+    category: 'Jacket',
+    price: 999.99,
+    stock: 5,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d15783008dc20256cebea7'),
+    name: 'Formal Shirt',
+    category: 'Shirt',
+    price: 349.99,
+    stock: 12,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d15783008dc20256cebea9'),
+    name: 'Wool Sweater',
+    category: 'Sweater',
+    price: 699.99,
+    stock: 10,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d15783008dc20256cebeaa'),
+    name: 'Casual Shorts',
+    category: 'Shorts',
+    price: 249.99,
+    stock: 25,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d15783008dc20256cebeab'),
+    name: 'Silk Scarf',
+    category: 'Accessories',
+    price: 149.99,
+    stock: 0,
+    discount: false
+  },
+  {
+    _id: ObjectId('68d15783008dc20256cebeac'),
+    name: 'Hooded Sweatshirt',
+    category: 'Sweater',
+    price: 399.99,
+    stock: 18,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebea4'),
+    name: 'Denim Jeans',
+    category: 'Pants',
+    price: 599.99,
+    stock: 20,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebea5'),
+    name: 'Cotton T-Shirt',
+    category: 'Shirt',
+    price: 199.99,
+    stock: 15,
+    discount: false
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebea6'),
+    name: 'Leather Jacket',
+    category: 'Jacket',
+    price: 999.99,
+    stock: 5,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebea7'),
+    name: 'Formal Shirt',
+    category: 'Shirt',
+    price: 349.99,
+    stock: 12,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebea9'),
+    name: 'Wool Sweater',
+    category: 'Sweater',
+    price: 699.99,
+    stock: 10,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebeaa'),
+    name: 'Casual Shorts',
+    category: 'Shorts',
+    price: 249.99,
+    stock: 25,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebeab'),
+    name: 'Silk Scarf',
+    category: 'Accessories',
+    price: 149.99,
+    stock: 0,
+    discount: false
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebeac'),
+    name: 'Hooded Sweatshirt',
+    category: 'Sweater',
+    price: 399.99,
+    stock: 18,
+    discount: true
+  }
+]
+Clothingstore> db.Clothes.update(
+...   { name: "Denim Jeans" },
+...   { $set: { stock: 50 } }
+... )
+...
+DeprecationWarning: Collection.update() is deprecated. Use updateOne, updateMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+Clothingstore> db.Clothes.find( {name: "Denim Jeans"})
+[
+  {
+    _id: ObjectId('68d15783008dc20256cebea4'),
+    name: 'Denim Jeans',
+    category: 'Pants',
+    price: 599.99,
+    stock: 50,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebea4'),
+    name: 'Denim Jeans',
+    category: 'Pants',
+    price: 599.99,
+    stock: 20,
+    discount: true
+  }
+]
+Clothingstore> db.Clothes.find( { name: "Leather Jacket"})
+[
+  {
+    _id: ObjectId('68d15783008dc20256cebea6'),
+    name: 'Leather Jacket',
+    category: 'Jacket',
+    price: 999.99,
+    stock: 5,
+    discount: true
+  },
+  {
+    _id: ObjectId('68d1d5a9c42e57ed08cebea6'),
+    name: 'Leather Jacket',
+    category: 'Jacket',
+    price: 999.99,
+    stock: 5,
+    discount: true
+  }
+]
+Clothingstore>  db.Clothes.update(
+... ...   { name: "Denim Jeans" },
+... ...   { $set: { stock: 50 } }
+... ... )
+Uncaught:
+SyntaxError: Unexpected token, expected "," (4:0)
+
+  2 | ...   { name: "Denim Jeans" },
+  3 | ...   { $set: { stock: 50 } }
+> 4 | ... )
+    | ^
+  5 |
+
+Clothingstore> db.Clothes.updateOne({name :"Leather Jacket"},{$set:{price : 1200}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Clothingstore> db.Clothes.remove({ stock: 0 }, { justOne: true })
+DeprecationWarning: Collection.remove() is deprecated. Use deleteOne, deleteMany, findOneAndDelete, or bulkWrite.
+{ acknowledged: true, deletedCount: 1 }
+Clothingstore> db.Clothes.deleteOne({ stock: 0 }, { justOne: true })
+{ acknowledged: true, deletedCount: 1 }
+Clothingstore>
