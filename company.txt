@@ -1,0 +1,79 @@
+test> use Company
+switched to db Company
+Company> db.employees.insertMany([
+...     { name: "Alice Johnson", department: "Engineering", salary: 75000, email: "alice.johnson@company.com" },
+...     { name: "Bob Smith", department: "Marketing", salary: 65000, email: "bob.smith@company.com" },
+...     { name: "Charlie Brown", department: "Engineering", salary: 80000, email: "charlie.brown@company.com" },
+...     { name: "Diana Lee", department: "HR", salary: 60000, email: "diana.lee@company.com" },
+...     { name: "Emma Davis", department: "Sales", salary: 70000, email: "emma.davis@company.com" },
+...     { name: "Frank Wilson", department: "Engineering", salary: 82000, email: "frank.wilson@company.com" },
+...     { name: "Grace Kim", department: "Marketing", salary: 68000, email: "grace.kim@company.com" },
+...     { name: "Henry Chen", department: "HR", salary: 62000, email: "henry.chen@company.com" }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68d3195d78ff7ef581cebea4'),
+    '1': ObjectId('68d3195d78ff7ef581cebea5'),
+    '2': ObjectId('68d3195d78ff7ef581cebea6'),
+    '3': ObjectId('68d3195d78ff7ef581cebea7'),
+    '4': ObjectId('68d3195d78ff7ef581cebea8'),
+    '5': ObjectId('68d3195d78ff7ef581cebea9'),
+    '6': ObjectId('68d3195d78ff7ef581cebeaa'),
+    '7': ObjectId('68d3195d78ff7ef581cebeab')
+  }
+}
+Company> db.employees.find({}, { name: 1, department: 1, _id: 0 })
+[
+  { name: 'Alice Johnson', department: 'Engineering' },
+  { name: 'Bob Smith', department: 'Marketing' },
+  { name: 'Charlie Brown', department: 'Engineering' },
+  { name: 'Diana Lee', department: 'HR' },
+  { name: 'Emma Davis', department: 'Sales' },
+  { name: 'Frank Wilson', department: 'Engineering' },
+  { name: 'Grace Kim', department: 'Marketing' },
+  { name: 'Henry Chen', department: 'HR' }
+]
+Company> db.employees.find().limit(4)
+[
+  {
+    _id: ObjectId('68d3195d78ff7ef581cebea4'),
+    name: 'Alice Johnson',
+    department: 'Engineering',
+    salary: 75000,
+    email: 'alice.johnson@company.com'
+  },
+  {
+    _id: ObjectId('68d3195d78ff7ef581cebea5'),
+    name: 'Bob Smith',
+    department: 'Marketing',
+    salary: 65000,
+    email: 'bob.smith@company.com'
+  },
+  {
+    _id: ObjectId('68d3195d78ff7ef581cebea6'),
+    name: 'Charlie Brown',
+    department: 'Engineering',
+    salary: 80000,
+    email: 'charlie.brown@company.com'
+  },
+  {
+    _id: ObjectId('68d3195d78ff7ef581cebea7'),
+    name: 'Diana Lee',
+    department: 'HR',
+    salary: 60000,
+    email: 'diana.lee@company.com'
+  }
+]
+Company> db.employees.find({}, { name: 1, salary: 1, _id: 0 }).skip(2).limit(3)
+[
+  { name: 'Charlie Brown', salary: 80000 },
+  { name: 'Diana Lee', salary: 60000 },
+  { name: 'Emma Davis', salary: 70000 }
+]
+Company> db.employees.find({}, { name: 1, email: 1, _id: 0 }).skip(5).limit(2)
+[
+  { name: 'Frank Wilson', email: 'frank.wilson@company.com' },
+  { name: 'Grace Kim', email: 'grace.kim@company.com' }
+]
+Company>
