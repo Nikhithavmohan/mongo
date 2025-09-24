@@ -1,0 +1,88 @@
+test> use Eventtracker
+switched to db Eventtracker
+Eventtracker> db.UpcomingEvents.insertOne({
+...     name: "Music Fest",
+...     date: new Date(),
+...     isFreeEntry: false,
+...     ticketPrice: 299.99,
+...     performers: ["DJ Max", "Live Band"],
+...     location: {
+...         city: "Chennai",
+...         venue: "Beach Arena"
+...     },
+...     specialCode: null
+... });
+{
+  acknowledged: true,
+  insertedId: ObjectId('68d474b5584da12149cebea4')
+}
+Eventtracker> db.UpcomingEvents.insertMany([
+...     {
+...         name: "Art Expo",
+...         date: new Date("2025-10-15"),
+...         isFreeEntry: true,
+...         ticketPrice: 0.00,
+...         performers: [],
+...         location: {
+...             city: "Delhi",
+...             venue: "City Gallery"
+...         },
+...         specialCode: "ART2025"
+...     },
+...     {
+...         name: "Tech Conference",
+...         date: new Date("2025-11-05"),
+...         isFreeEntry: false,
+...         ticketPrice: 499.99,
+...         performers: ["Keynote Speaker", "Panel Discussion"],
+...         location: {
+...             city: "Bangalore",
+...             venue: "Tech Convention Center"
+...         },
+...         specialCode: null
+...     }
+... ]);
+...
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68d474e3584da12149cebea5'),
+    '1': ObjectId('68d474e3584da12149cebea6')
+  }
+}
+Eventtracker> show collections
+UpcomingEvents
+Eventtracker> db.UpcomingEvents.find()
+[
+  {
+    _id: ObjectId('68d474b5584da12149cebea4'),
+    name: 'Music Fest',
+    date: ISODate('2025-09-24T22:46:13.249Z'),
+    isFreeEntry: false,
+    ticketPrice: 299.99,
+    performers: [ 'DJ Max', 'Live Band' ],
+    location: { city: 'Chennai', venue: 'Beach Arena' },
+    specialCode: null
+  },
+  {
+    _id: ObjectId('68d474e3584da12149cebea5'),
+    name: 'Art Expo',
+    date: ISODate('2025-10-15T00:00:00.000Z'),
+    isFreeEntry: true,
+    ticketPrice: 0,
+    performers: [],
+    location: { city: 'Delhi', venue: 'City Gallery' },
+    specialCode: 'ART2025'
+  },
+  {
+    _id: ObjectId('68d474e3584da12149cebea6'),
+    name: 'Tech Conference',
+    date: ISODate('2025-11-05T00:00:00.000Z'),
+    isFreeEntry: false,
+    ticketPrice: 499.99,
+    performers: [ 'Keynote Speaker', 'Panel Discussion' ],
+    location: { city: 'Bangalore', venue: 'Tech Convention Center' },
+    specialCode: null
+  }
+]
+Eventtracker>
