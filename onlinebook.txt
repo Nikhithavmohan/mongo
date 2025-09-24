@@ -1,0 +1,75 @@
+test> use Onlinebookstore
+switched to db Onlinebookstore
+Onlinebookstore> db.books.insertMany([
+...     { title: "The Great Gatsby", author: "F. Scott Fitzgerald", price: 12.99, rating: 4.3, genre: "Fiction" },
+...     { title: "1984", author: "George Orwell", price: 9.99, rating: 4.8, genre: "Dystopian" },
+...     { title: "Pride and Prejudice", author: "Jane Austen", price: 7.99, rating: 4.6, genre: "Romance" },
+...     { title: "The Hobbit", author: "J.R.R. Tolkien", price: 14.99, rating: 4.9, genre: "Fantasy" },
+...     { title: "Sapiens", author: "Yuval Noah Harari", price: 18.99, rating: 4.7, genre: "Non-Fiction" },
+...     { title: "The Da Vinci Code", author: "Dan Brown", price: 11.99, rating: 4.2, genre: "Mystery" },
+...     { title: "Dune", author: "Frank Herbert", price: 15.99, rating: 4.8, genre: "Science Fiction" },
+...     { title: "The Alchemist", author: "Paulo Coelho", price: 10.99, rating: 4.4, genre: "Fiction" },
+...     { title: "Educated", author: "Tara Westover", price: 13.99, rating: 4.7, genre: "Non-Fiction" },
+...     { title: "The Night Circus", author: "Erin Morgenstern", price: 16.99, rating: 4.5, genre: "Fantasy" }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68d471d5bd6aca18cccebea4'),
+    '1': ObjectId('68d471d5bd6aca18cccebea5'),
+    '2': ObjectId('68d471d5bd6aca18cccebea6'),
+    '3': ObjectId('68d471d5bd6aca18cccebea7'),
+    '4': ObjectId('68d471d5bd6aca18cccebea8'),
+    '5': ObjectId('68d471d5bd6aca18cccebea9'),
+    '6': ObjectId('68d471d5bd6aca18cccebeaa'),
+    '7': ObjectId('68d471d5bd6aca18cccebeab'),
+    '8': ObjectId('68d471d5bd6aca18cccebeac'),
+    '9': ObjectId('68d471d5bd6aca18cccebead')
+  }
+}
+Onlinebookstore> db.books.find({}, { _id: 0, title: 1, author: 1 });
+[
+  { title: 'The Great Gatsby', author: 'F. Scott Fitzgerald' },
+  { title: '1984', author: 'George Orwell' },
+  { title: 'Pride and Prejudice', author: 'Jane Austen' },
+  { title: 'The Hobbit', author: 'J.R.R. Tolkien' },
+  { title: 'Sapiens', author: 'Yuval Noah Harari' },
+  { title: 'The Da Vinci Code', author: 'Dan Brown' },
+  { title: 'Dune', author: 'Frank Herbert' },
+  { title: 'The Alchemist', author: 'Paulo Coelho' },
+  { title: 'Educated', author: 'Tara Westover' },
+  { title: 'The Night Circus', author: 'Erin Morgenstern' }
+]
+Onlinebookstore> db.books.find({}, { _id: 0, title: 1, author: 1, rating: 1 })
+...         .sort({ rating: -1 })
+...         .limit(5);
+...
+[
+  { title: 'The Hobbit', author: 'J.R.R. Tolkien', rating: 4.9 },
+  { title: 'Dune', author: 'Frank Herbert', rating: 4.8 },
+  { title: '1984', author: 'George Orwell', rating: 4.8 },
+  { title: 'Educated', author: 'Tara Westover', rating: 4.7 },
+  { title: 'Sapiens', author: 'Yuval Noah Harari', rating: 4.7 }
+]
+Onlinebookstore> db.books.find({}, { _id: 0, title: 1, price: 1 })
+...         .sort({ price: 1 })
+...         .skip(3)
+...         .limit(4);
+...
+[
+  { title: 'The Da Vinci Code', price: 11.99 },
+  { title: 'The Great Gatsby', price: 12.99 },
+  { title: 'Educated', price: 13.99 },
+  { title: 'The Hobbit', price: 14.99 }
+]
+Onlinebookstore> db.books.distinct("genre");
+[
+  'Dystopian',
+  'Fantasy',
+  'Fiction',
+  'Mystery',
+  'Non-Fiction',
+  'Romance',
+  'Science Fiction'
+]
+Onlinebookstore>
