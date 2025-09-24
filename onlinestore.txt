@@ -1,0 +1,85 @@
+
+test> use Onlinestore
+switched to db Onlinestore
+Onlinestore> db.products.insertMany([
+...     { name: "Wireless Mouse", category: "Accessories", price: 29.99, rating: 4.2 },
+...     { name: "Gaming Laptop", category: "Laptops", price: 1499.99, rating: 4.8 },
+...     { name: "Smartphone Pro", category: "Smartphones", price: 999.99, rating: 4.5 },
+...     { name: "Bluetooth Headphones", category: "Accessories", price: 89.99, rating: 4.3 },
+...     { name: "4K Monitor", category: "Monitors", price: 399.99, rating: 4.6 },
+...     { name: "Tablet X", category: "Tablets", price: 299.99, rating: 4.1 },
+...     { name: "Smart Watch", category: "Wearables", price: 199.99, rating: 4.4 },
+...     { name: "Desktop PC", category: "Desktops", price: 1299.99, rating: 4.7 },
+...     { name: "Wireless Keyboard", category: "Accessories", price: 49.99, rating: 4.0 },
+...     { name: "UltraBook", category: "Laptops", price: 1099.99, rating: 4.9 }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68d47009bf3e707264cebea4'),
+    '1': ObjectId('68d47009bf3e707264cebea5'),
+    '2': ObjectId('68d47009bf3e707264cebea6'),
+    '3': ObjectId('68d47009bf3e707264cebea7'),
+    '4': ObjectId('68d47009bf3e707264cebea8'),
+    '5': ObjectId('68d47009bf3e707264cebea9'),
+    '6': ObjectId('68d47009bf3e707264cebeaa'),
+    '7': ObjectId('68d47009bf3e707264cebeab'),
+    '8': ObjectId('68d47009bf3e707264cebeac'),
+    '9': ObjectId('68d47009bf3e707264cebead')
+  }
+}
+Onlinestore> db.products.find({}, { _id: 0, name: 1, price: 1 });
+[
+  { name: 'Wireless Mouse', price: 29.99 },
+  { name: 'Gaming Laptop', price: 1499.99 },
+  { name: 'Smartphone Pro', price: 999.99 },
+  { name: 'Bluetooth Headphones', price: 89.99 },
+  { name: '4K Monitor', price: 399.99 },
+  { name: 'Tablet X', price: 299.99 },
+  { name: 'Smart Watch', price: 199.99 },
+  { name: 'Desktop PC', price: 1299.99 },
+  { name: 'Wireless Keyboard', price: 49.99 },
+  { name: 'UltraBook', price: 1099.99 },
+  { name: 'Wireless Mouse', price: 29.99 },
+  { name: 'Gaming Laptop', price: 1499.99 },
+  { name: 'Smartphone Pro', price: 999.99 },
+  { name: 'Bluetooth Headphones', price: 89.99 },
+  { name: '4K Monitor', price: 399.99 },
+  { name: 'Tablet X', price: 299.99 },
+  { name: 'Smart Watch', price: 199.99 },
+  { name: 'Desktop PC', price: 1299.99 },
+  { name: 'Wireless Keyboard', price: 49.99 },
+  { name: 'UltraBook', price: 1099.99 }
+]
+Type "it" for more
+Onlinestore> db.products.find({}, { _id: 0, name: 1, price: 1, category: 1 })
+...            .sort({ price: -1 })
+...            .limit(3);
+...
+[
+  { name: 'Gaming Laptop', category: 'Laptops', price: 1499.99 },
+  { name: 'Gaming Laptop', category: 'Laptops', price: 1499.99 },
+  { name: 'Gaming Laptop', category: 'Laptops', price: 1499.99 }
+]
+Onlinestore> db.products.find({}, { _id: 0, name: 1, rating: 1 })
+...            .sort({ rating: -1 })
+...            .skip(5)
+...            .limit(4);
+...
+[
+  { name: 'Gaming Laptop', rating: 4.8 },
+  { name: 'Desktop PC', rating: 4.7 },
+  { name: 'Desktop PC', rating: 4.7 },
+  { name: 'Desktop PC', rating: 4.7 }
+]
+Onlinestore> db.products.distinct("category");
+[
+  'Accessories',
+  'Desktops',
+  'Laptops',
+  'Monitors',
+  'Smartphones',
+  'Tablets',
+  'Wearables'
+]
+Onlinestore>
