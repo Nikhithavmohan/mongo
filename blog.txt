@@ -1,0 +1,36 @@
+test> use blog
+switched to db blog
+blog> db.posts.insertOne({
+...   title: "Getting Started with MongoDB",
+...   author: "Jane Doe",
+...   tags: ["mongodb", "database", "nosql"],
+...   publishedDate: new Date("2025-09-15")
+... })
+...
+{
+  acknowledged: true,
+  insertedId: ObjectId('68de8c4e7f18446a13cebea4')
+}
+blog> db.posts.createIndex({author:1})
+author_1
+blog> db.posts.find({ author: "Jane Doe" })
+[
+  {
+    _id: ObjectId('68de8c4e7f18446a13cebea4'),
+    title: 'Getting Started with MongoDB',
+    author: 'Jane Doe',
+    tags: [ 'mongodb', 'database', 'nosql' ],
+    publishedDate: ISODate('2025-09-15T00:00:00.000Z')
+  }
+]
+blog> db.posts.createIndex({publishedDate :-1})
+publishedDate_-1
+blog> db.posts.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { author: 1 }, name: 'author_1' },
+  { v: 2, key: { publishedDate: -1 }, name: 'publishedDate_-1' }
+]
+blog> db.posts.dropIndexes({author :1})
+{ nIndexesWas: 3, ok: 1 }
+blog>
